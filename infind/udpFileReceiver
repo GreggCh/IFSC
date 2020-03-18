@@ -23,7 +23,7 @@ try:
         f.write(data)
         s.settimeout(2)
         data,addr = s.recvfrom(buf)
-exept timeout:
+except:
     print ("Error")
     f.close()
     s.close()
