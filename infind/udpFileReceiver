@@ -1,26 +1,30 @@
-import socket
+# ----- receiver.py -----
 
+#!/usr/bin/env python
 
-UDP_IP = socket.gethostbyaddr("34.210.45.213")[0]
-UDP_PORT = 5005
+from socket import *
+import sys
+import select
 
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
-sock.bind((UDP_IP, UDP_PORT))
+host= "34.210.45.213"
+port = 7000
+s = socket(AF_INET,SOCK_DGRAM)
+s.bind((host,port))
 
-with open('received_file', 'wb') as f:
-    print 'file opened'
-    while True:
-        print('receiving data...')
-        data = sock.recv(1024)
-        #print('data=%s', (data))
-        if not data:
-            f.close()
-            print 'file close()'
-            break
-        # write data to a file
+addr = (host,port)
+buf=1024
+
+data,addr = s.recvfrom(buf)
+print "Received File:",data.strip()
+f = open(data.strip(),'wb')
+
+data,addr = s.recvfrom(buf)
+try:
+    while(data):
         f.write(data)
-        
-print('Successfully get the file')
-s.close()
-print('connection closed')
+        s.settimeout(2)
+        data,addr = s.recvfrom(buf)
+except timeout:
+    f.close()
+    s.close()
+    print "File Downloaded"
