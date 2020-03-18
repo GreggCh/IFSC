@@ -6,7 +6,7 @@ from socket import *
 import sys
 import select
 
-host= socket.gethostbyaddr("34.210.45.213")[0]
+host= localhost
 port = 7000
 s = socket(AF_INET,SOCK_DGRAM)
 s.bind((host,port))
