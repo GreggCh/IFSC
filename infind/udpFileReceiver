@@ -23,7 +23,8 @@ try:
         f.write(data)
         s.settimeout(2)
         data,addr = s.recvfrom(buf)
-exept:
+exept timeout:
+    print ("Error")
     f.close()
     s.close()
     print "File Downloaded"
