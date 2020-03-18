@@ -1,12 +1,13 @@
 # ----- receiver.py -----
 
 #!/usr/bin/env python
+import socket
 
 from socket import *
 import sys
 import select
 
-host= "34.210.45.213"
+host = socket.gethostbyaddr("34.210.45.213")[0]
 port = 7000
 s = socket(AF_INET,SOCK_DGRAM)
 s.bind((host,port))
