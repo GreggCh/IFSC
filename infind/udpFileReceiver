@@ -12,9 +12,9 @@ s.bind((host,port))
 print ("Receiving...")
 
 addr = (host,port)
-buf=1024
+buf=1
 
-data,addr = s.recv(buf)
+data,addr = s.recvfrom(buf)
 print ("Received File:",data.strip())
 f = open(data.strip(),'wb')
 
