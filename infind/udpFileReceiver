@@ -23,7 +23,7 @@ try:
         f.write(data)
         s.settimeout(2)
         data,addr = s.recvfrom(buf)
-socket.except timeout:
+
     f.close()
     s.close()
     print "File Downloaded"
