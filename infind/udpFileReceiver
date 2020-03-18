@@ -14,7 +14,7 @@ print ("Receiving...")
 addr = (host,port)
 buf=1024
 
-data,addr = s.recvfrom(buf)
+data,addr = s.recv(buf)
 print ("Received File:",data.strip())
 f = open(data.strip(),'wb')
 
