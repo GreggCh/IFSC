@@ -1,0 +1,51 @@
+# server3.py on EC2 instance
+import socket
+from threading import Thread
+from SocketServer import ThreadingMixIn
+
+# UDP_IP = 'localhost'
+UDP_IP = socket.gethostbyaddr("34.210.45.213")[0]
+UDP_PORT = 6002
+BUFFER_SIZE = 1024
+
+print 'UDP_IP=',UDP_IP
+print 'UDP_PORT=',UDP_PORT
+
+class ClientThread(Thread):
+
+    def __init__(self,ip,port,sock):
+        Thread.__init__(self)
+        self.ip = ip
+        self.port = port
+        self.sock = sock
+        print " New thread started for "+ip+":"+str(port)
+
+    def run(self):
+        filename='mytext.txt'
+        f = open(filename,'rb')
+        while True:
+            l = f.read(BUFFER_SIZE)
+            while (l):
+                self.sock.send(l)
+                #print('Sent ',repr(l))
+                l = f.read(BUFFER_SIZE)
+            if not l:
+                f.close()
+                self.sock.close()
+                break
+
+udpsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+udpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+udpsock.bind((UDP_IP, UDP_PORT))
+threads = []
+
+while True:
+    data, addr = udpsock.recvfrom(1024)
+    print "Waiting for incoming connections..."
+    ip, port = udpsock.accept()
+    newthread = ClientThread(ip,port,conn)
+    newthread.start()
+    threads.append(newthread)
+
+for t in threads:
+    t.join()
