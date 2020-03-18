@@ -12,7 +12,7 @@ s.bind((host,port))
 print ("Receiving...")
 
 addr = (host,port)
-buf=1
+buf=1024
 
 data,addr = s.recvfrom(buf)
 print ("Received File:",data.strip())
@@ -24,8 +24,7 @@ try:
         f.write(data)
         s.settimeout(2)
         data,addr = s.recvfrom(buf)
-except:
-    print ("Error")
+except timeout:
     f.close()
     s.close()
     print "File Downloaded"
