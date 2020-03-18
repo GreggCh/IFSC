@@ -14,7 +14,7 @@ addr = (host,port)
 buf=1024
 
 data,addr = s.recvfrom(buf)
-print "Received File:",data.strip()
+print ("Received File:",data.strip())
 f = open(data.strip(),'wb')
 
 data,addr = s.recvfrom(buf)
@@ -23,7 +23,7 @@ try:
         f.write(data)
         s.settimeout(2)
         data,addr = s.recvfrom(buf)
-except timeout:
+socket.except timeout:
     f.close()
     s.close()
     print "File Downloaded"
