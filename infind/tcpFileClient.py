@@ -16,7 +16,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 
 
-with open('received_file.txt', 'wb') as f:
+with open('my_file.txt', 'wb') as f:
     print ('file opened')
     while True:
         #print('receiving data...')

@@ -6,17 +6,18 @@ from socket import *
 import sys
 import select
 
-host = "127.0.0.1"
-port = 7001
+host = socket.gethostbyaddr("34.210.45.213")[0]
+port = 7000
 s = socket(AF_INET,SOCK_DGRAM)
 s.bind(host, port)
 
 addrHost = (host, port)
 buf=1024
 
-data, addrHost = s.recvfrom(buf)
-print ("Received File:",data.strip())
-f = open("received_file.txt",'wb')
+fileName, addrHost = s.recvfrom(buf)
+print ("Received File:",fileName.strip())
+
+f = open(fileName.strip(),'wb')
 
 data, addrHost = s.recvfrom(buf)
 try:

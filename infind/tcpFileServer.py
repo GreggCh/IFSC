@@ -5,7 +5,7 @@ from SocketServer import ThreadingMixIn
 
 # TCP_IP = 'localhost'
 TCP_IP = socket.gethostbyaddr("34.210.45.213")[0]
-TCP_PORT = 6001
+TCP_PORT = 5000
 BUFFER_SIZE = 1024
 
 print 'TCP_IP=',TCP_IP
