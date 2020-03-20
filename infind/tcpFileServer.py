@@ -18,10 +18,10 @@ class ClientThread(Thread):
         self.ip = ip
         self.port = port
         self.sock = sock
-        print (" New thread started for "+ip+":"+str(port))
+        print ("New thread started for "+ip+":"+str(port))
 
     def run(self):
-        filename= self.ip.replace(".", "") + ".txt"
+        filename = "aula.txt"
         print ("Openning file: " + filename)
         f = open(filename,'rb')
         while True:
