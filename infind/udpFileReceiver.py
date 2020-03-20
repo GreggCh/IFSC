@@ -21,7 +21,7 @@ while True:
     #print ("Received File:",fileName.strip())
 
     fileName = "aula.txt"
-    f = open(fileName.strip(),'w')
+    f = open(fileName.strip(),'x')
 
     data, addrHost = s.recvfrom(buf)
     try:
