@@ -26,7 +26,8 @@ while True:
             f.write(data)
             s.settimeout(2)
             data, addrHost = s.recvfrom(buf)
-    except timeout:
+
+    except:
         f.close()
         s.close()
         print ("File Downloaded")
