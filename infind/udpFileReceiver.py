@@ -17,9 +17,10 @@ while True:
     addrHost = (host, port)
     buf=1024
 
-    fileName, addrHost = s.recvfrom(buf)
-    print ("Received File:",fileName.strip())
+    #fileName, addrHost = s.recvfrom(buf)
+    #print ("Received File:",fileName.strip())
 
+    fileName = "aula.txt"
     f = open(fileName.strip(),'wb')
 
     data, addrHost = s.recvfrom(buf)
