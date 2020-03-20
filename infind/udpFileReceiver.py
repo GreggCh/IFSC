@@ -32,7 +32,7 @@ while True:
             s.settimeout(2)
             data, addrHost = s.recvfrom(buf)
     except:
-        f.close()
-        s.close()
         print ("File Downloaded")
         sent = s.sendto("File uploaded", addrHost)
+        f.close()
+        s.close()
