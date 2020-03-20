@@ -20,15 +20,16 @@ while True:
     #fileName, addrHost = s.recvfrom(buf)
     #print ("Received File:",fileName.strip())
 
+    data, addrHost = s.recvfrom(buf)
+
     fileName = "aula.txt"
     f = open(fileName.strip(),"w+")
 
-    data, addrHost = s.recvfrom(buf)
     try:
         while(data):
             print("receiving ..." + str(data))
             f.write(str(data))
-            s.settimeout(10)
+            s.settimeout(2)
             data, addrHost = s.recvfrom(buf)
 
     except:
