@@ -12,11 +12,11 @@ port = 7000
 buf =1024
 addr = (host,port)
 
-file_name = "meu_arquivo.txt"
+file_name = "arquivo.txt"
 
 print ("Sending file: " + file_name)
 
-#s.sendto(file_name.encode(),addr)
+s.sendto(file_name.encode(),addr)
 
 f=open(file_name,"rb")
 data = f.read(buf)

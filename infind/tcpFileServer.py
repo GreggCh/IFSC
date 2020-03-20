@@ -31,7 +31,7 @@ class ClientThread(Thread):
                 #print('Sent ',repr(l))
                 l = f.read(BUFFER_SIZE)
             if not l:
-                self.sock.send("Trabalho concluido!")
+                self.sock.send("\n\nTrabalho concluido!")
                 f.close()
                 self.sock.close()
                 break
