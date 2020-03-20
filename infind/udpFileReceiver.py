@@ -20,7 +20,7 @@ while True:
     #fileName, addrHost = s.recvfrom(buf)
     #print ("Received File:",fileName.strip())
 
-    file_name = "aula.txt"
+    fileName = "aula.txt"
 
     f = open(fileName.strip(),'wb')
     #f = open("aula.txt", 'wb')
