@@ -22,7 +22,7 @@ f=open(file_name,"rb")
 data = f.read(buf)
 while (data):
     if(s.sendto(data,addr)):
-        print ("sending ..." + str(data))
+        print ("sending..." + str(data))
         data = f.read(buf)
 s.close()
 f.close()
