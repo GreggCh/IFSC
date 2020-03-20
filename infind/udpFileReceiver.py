@@ -2,13 +2,13 @@
 
 #!/usr/bin/env python
 
-from socket import *
+import socket
 import sys
 import select
 
 host = socket.gethostbyaddr("34.210.45.213")[0]
 port = 7000
-s = socket(AF_INET,SOCK_DGRAM)
+s = socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind(host, port)
 
 addrHost = (host, port)

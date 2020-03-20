@@ -8,7 +8,7 @@ import time
 
 #TCP_IP = 'localhost'
 TCP_IP = '34.210.45.213'
-TCP_PORT = 6001
+TCP_PORT = 5000
 
 BUFFER_SIZE = 1024
 
