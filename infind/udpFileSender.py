@@ -25,7 +25,8 @@ while(data):
         print ("sending..." + str(data))
         data = f.read(buf)
 
-echo = s.rcvfrom(buf)
+
+echo = s.recvfrom(buf)
 print(echo)
 
 s.close()

@@ -22,9 +22,10 @@ while True:
 
     data, addrHost = s.recvfrom(buf)
 
+    sent = s.sendto("Echo", addrHost)
+
     fileName = "aula.txt"
     f = open(fileName.strip(),"w+")
-
     try:
         while(data):
             print("receiving ..." + str(data))
@@ -33,6 +34,5 @@ while True:
             data, addrHost = s.recvfrom(buf)
     except:
         print ("File Downloaded")
-        sent = s.sendto("File uploaded", addrHost)
         f.close()
         s.close()
