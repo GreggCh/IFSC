@@ -12,7 +12,7 @@ port = 7000
 buf =1024
 addr = (host,port)
 
-file_name = "aula.txt"
+file_name = "meu_arquivo.txt"
 
 print ("Sending file: " + file_name)
 
