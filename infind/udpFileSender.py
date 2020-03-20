@@ -2,16 +2,22 @@
 
 #!/usr/bin/env python
 
-from socket import *
+import socket
 import sys
+import select
 
-s = socket(AF_INET,SOCK_DGRAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 host = "34.210.45.213"
 port = 7000
 buf =1024
 addr = (host,port)
 
-file_name = "mytext2.txt"
+hostname = socket.gethostname()
+IPAddr = socket.gethostbyname(hostname)
+
+file_name = IPAddr.replace(".","") + ".txt"
+
+print ("Sending file: " + file_name)
 
 s.sendto(file_name.encode(),addr)
 

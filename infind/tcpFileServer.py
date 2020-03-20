@@ -8,8 +8,8 @@ TCP_IP = socket.gethostbyaddr("34.210.45.213")[0]
 TCP_PORT = 5000
 BUFFER_SIZE = 1024
 
-print 'TCP_IP=',TCP_IP
-print 'TCP_PORT=',TCP_PORT
+print ('TCP_IP=',TCP_IP)
+print ('TCP_PORT=',TCP_PORT)
 
 class ClientThread(Thread):
 
@@ -18,10 +18,11 @@ class ClientThread(Thread):
         self.ip = ip
         self.port = port
         self.sock = sock
-        print " New thread started for "+ip+":"+str(port)
+        print (" New thread started for "+ip+":"+str(port))
 
     def run(self):
-        filename='mytext.txt'
+        filename= self.ip.replace(".", "") + ".txt"
+        print ("Openning file: " + filename)
         f = open(filename,'rb')
         while True:
             l = f.read(BUFFER_SIZE)
@@ -41,9 +42,9 @@ threads = []
 
 while True:
     tcpsock.listen(5)
-    print "Waiting for incoming connections..."
+    print ("Waiting for incoming connections...")
     (conn, (ip,port)) = tcpsock.accept()
-    print 'Got connection from ', (ip,port)
+    print ('Got connection from ', (ip,port))
     newthread = ClientThread(ip,port,conn)
     newthread.start()
     threads.append(newthread)
