@@ -20,9 +20,13 @@ print ("Sending file: " + file_name)
 
 f=open(file_name,"rb")
 data = f.read(buf)
-while (data):
+while(data):
     if(s.sendto(data,addr)):
         print ("sending..." + str(data))
         data = f.read(buf)
+
+echo = s.rcvfrom(buf)
+print(echo)
+
 s.close()
 f.close()
