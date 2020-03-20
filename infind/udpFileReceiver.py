@@ -27,7 +27,7 @@ while True:
     try:
         while(data):
             print("receiving ..." + str(data))
-            f.write(data)
+            f.write(str(data))
             s.settimeout(10)
             data, addrHost = s.recvfrom(buf)
 
