@@ -31,7 +31,7 @@ while True:
             f.write(str(data))
             s.settimeout(2)
             data, addrHost = s.recvfrom(buf)
-
+            print ("branch test")
     except:
         f.close()
         s.close()
