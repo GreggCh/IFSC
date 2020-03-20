@@ -24,14 +24,13 @@ while True:
     f = open(fileName.strip(),'wb')
 
     data, addrHost = s.recvfrom(buf)
-    print("receiving ..." + str(data))
+
+    print ("opening file: " + fileName.strip())
     try:
         while(data):
             print("receiving ..." + str(data))
             f.write(data)
-            s.settimeout(2)
             data, addrHost = s.recvfrom(buf)
-
     except:
         f.close()
         s.close()
