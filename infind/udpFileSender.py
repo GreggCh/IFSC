@@ -12,10 +12,7 @@ port = 7000
 buf =1024
 addr = (host,port)
 
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
-
-file_name = IPAddr.replace(".","") + ".txt"
+file_name = "aula.txt"
 
 print ("Sending file: " + file_name)
 
