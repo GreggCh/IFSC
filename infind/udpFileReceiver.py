@@ -15,7 +15,7 @@ while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #DGRAM - tipo de mensagem do protocolo UDP
     s.bind((host, port))
 
-    addrHost = (host, port)
+    #addrHost = (host, port)
     buf=1024
 
     #fileName, addrHost = s.recvfrom(buf)
