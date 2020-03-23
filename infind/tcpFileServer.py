@@ -26,7 +26,7 @@ class ClientThread(Thread):
         data = self.sock.recv(BUFFER_SIZE)
         f.write(data)
 
-        print ("Openning file: " + filename)
+        print ("Openning file: " + FILE_NAME)
         f = open(FILE_NAME,'rb')
         while True:
             l = f.read(BUFFER_SIZE)
