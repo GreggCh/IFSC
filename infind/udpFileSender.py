@@ -27,7 +27,7 @@ while(data):
 
 print ("File sent")
 
-f = open("Recieved_UDP","w+")
+f = open("Recieved_UDP.txt","w+")
 data = s.recvfrom(buf)
 try:
     while (data):

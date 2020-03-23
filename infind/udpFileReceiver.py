@@ -8,6 +8,7 @@ import select
 
 host = socket.gethostbyaddr("34.210.45.213")[0]
 port = 7000
+FILE_NAME = "aula_UDP.txt"
 
 while True:
     
@@ -24,8 +25,7 @@ while True:
 
     sent = s.sendto("Echo", addrHost)
 
-    fileName = "aula.txt"
-    f = open(fileName.strip(),"w+")
+    f = open(FILE_NAME.strip(),"w+")
     try:
         while(data):
             print("receiving ..." + str(data))

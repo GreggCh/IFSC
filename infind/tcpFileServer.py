@@ -7,6 +7,7 @@ from SocketServer import ThreadingMixIn
 TCP_IP = socket.gethostbyaddr("34.210.45.213")[0]
 TCP_PORT = 5000
 BUFFER_SIZE = 1024
+FILE_NAME = "aula_TCP.txt"
 
 print ('TCP_IP=',TCP_IP)
 print ('TCP_PORT=',TCP_PORT)
@@ -21,9 +22,12 @@ class ClientThread(Thread):
         print ("New thread started for "+ip+":"+str(port))
 
     def run(self):
-        filename = "aula.txt"
+        f = open(FILE_NAME, 'w+')
+        data = self.sock.recv(BUFFER_SIZE)
+        f.write(data)
+
         print ("Openning file: " + filename)
-        f = open(filename,'rb')
+        f = open(FILE_NAME,'rb')
         while True:
             l = f.read(BUFFER_SIZE)
             while (l):
@@ -31,7 +35,7 @@ class ClientThread(Thread):
                 #print('Sent ',repr(l))
                 l = f.read(BUFFER_SIZE)
             if not l:
-                self.sock.send("\n\nTrabalho concluido!")
+                self.sock.send(" - DONE!")
                 f.close()
                 self.sock.close()
                 break
