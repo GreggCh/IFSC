@@ -30,8 +30,8 @@ while True:
         while(data):
             print("receiving ..." + str(data))
             f.write(str(data))
-            s.settimeout(2)
-            data, addrHost = s.recvfrom(buf)
+            #s.settimeout(2)
+            #data, addrHost = s.recvfrom(buf)
     except:
         data += " - DONE!"
         sent = s.sendto(data, addrHost)
