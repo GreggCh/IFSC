@@ -26,8 +26,6 @@ class ClientThread(Thread):
         data = self.sock.recv(BUFFER_SIZE)
         f.write(data)
 
-        FILE_NAME = self.ip.replace('.','')
-
         print ("Openning file: " + FILE_NAME)
         f = open(FILE_NAME,'rb')
         while True:
