@@ -33,6 +33,8 @@ while True:
             s.settimeout(2)
             data, addrHost = s.recvfrom(buf)
     except:
+        data += " - DONE!"
+        sent = s.sendto(data, addrHost)
         print ("File Downloaded")
         f.close()
         s.close()

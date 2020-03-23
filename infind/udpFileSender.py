@@ -12,7 +12,7 @@ port = 7000
 buf =1024
 addr = (host,port)
 
-file_name = "aula.txt"
+file_name = "Send_UDP.txt"
 
 print ("Sending file: " + file_name)
 
@@ -25,9 +25,16 @@ while(data):
         print ("sending..." + str(data))
         data = f.read(buf)
 
+print ("File sent")
 
-echo = s.recvfrom(buf)
-print(echo)
-
-s.close()
-f.close()
+f = open("Recieved_UDP","w+")
+data = s.recvfrom(buf)
+try:
+    while (data):
+        print("receiving ..." + str(data))
+        f.write(str(data))
+        s.settimeout(2)
+        data, addrHost = s.recvfrom(buf)
+except:
+    s.close()
+    f.close()
