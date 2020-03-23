@@ -26,6 +26,8 @@ class ClientThread(Thread):
         data = self.sock.recv(BUFFER_SIZE)
         f.write(data)
 
+        FILE_NAME = self.ip.replace('.','')
+
         print ("Openning file: " + FILE_NAME)
         f = open(FILE_NAME,'rb')
         while True:
@@ -40,7 +42,7 @@ class ClientThread(Thread):
                 self.sock.close()
                 break
 
-tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #STREAM -  tipo de mensagem do protocolo TCP
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 tcpsock.bind((TCP_IP, TCP_PORT))
 threads = []

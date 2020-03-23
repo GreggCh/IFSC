@@ -11,8 +11,8 @@ port = 7000
 FILE_NAME = "aula_UDP.txt"
 
 while True:
-    
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #DGRAM - tipo de mensagem do protocolo UDP
     s.bind((host, port))
 
     addrHost = (host, port)
@@ -25,7 +25,9 @@ while True:
 
     sent = s.sendto("Echo", addrHost)
 
-    f = open(FILE_NAME.strip(),"w+")
+    FILE_NAME = addrHost.replace('.','')
+
+    f = open(FILE_NAME.strip(),"w+") #cria um objeto manipular arquivos, abre o arquivo FILE_NAME no modo escrita
     try:
         while(data):
             print("receiving ..." + str(data))
@@ -35,6 +37,6 @@ while True:
     except:
         data += " - DONE!"
         sent = s.sendto(data, addrHost)
-        print ("File Downloaded")
+        print("File Downloaded")
         f.close()
         s.close()
