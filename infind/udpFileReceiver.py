@@ -25,9 +25,6 @@ while True:
 
     sent = s.sendto("Echo", addrHost)
 
-    FILE_NAME = str(addrHost)
-    FILE_NAME = FILE_NAME.replace('.', '') + ".txt"
-
     f = open(FILE_NAME.strip(),"w+") #cria um objeto manipular arquivos, abre o arquivo FILE_NAME no modo escrita
     try:
         while(data):
