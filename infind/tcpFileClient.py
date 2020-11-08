@@ -7,7 +7,7 @@ import socket
 import time
 
 #TCP_IP = 'localhost'
-TCP_IP = '34.210.45.213'
+TCP_IP = '54.209.33.15'
 TCP_PORT = 5000
 
 BUFFER_SIZE = 1024

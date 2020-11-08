@@ -4,7 +4,7 @@ from threading import Thread
 from SocketServer import ThreadingMixIn
 
 # TCP_IP = 'localhost'
-TCP_IP = socket.gethostbyaddr("34.210.45.213")[0]
+TCP_IP = socket.gethostbyaddr("54.209.33.15")[0]
 TCP_PORT = 5000
 BUFFER_SIZE = 1024
 FILE_NAME = "aula_TCP.txt"

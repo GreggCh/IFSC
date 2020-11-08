@@ -7,7 +7,7 @@ import sys
 import select
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-host = "34.210.45.213"
+host = "54.209.33.15"
 port = 7000
 buf =1024
 addr = (host,port)
@@ -28,6 +28,7 @@ while(data):
 print ("File sent")
 
 f = open("Recieved_UDP.txt","w+")
+print ("Waiting...")
 data = s.recvfrom(buf)
 try:
     while (data):
@@ -36,5 +37,6 @@ try:
         s.settimeout(2)
         data, addrHost = s.recvfrom(buf)
 except:
-    s.close()
-    f.close()
+    print("End of file")
+s.close()
+f.close()
