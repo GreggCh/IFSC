@@ -1,40 +1,15 @@
-# ----- receiver.py -----
-
-#!/usr/bin/env python
-
 import socket
-import sys
-import select
 
-host = socket.gethostbyaddr("34.210.45.213")[0]
-port = 7000
-FILE_NAME = "aula_UDP.txt"
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+server_address = '127.0.0.1'
+server_port = 31337
+
+server = (server_address, server_port)
+sock.bind(server)
+print("Listening on " + server_address + ":" + str(server_port))
 
 while True:
-
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #DGRAM - tipo de mensagem do protocolo UDP
-    s.bind((host, port))
-
-    #addrHost = (host, port)
-    buf=1024
-
-    #fileName, addrHost = s.recvfrom(buf)
-    #print ("Received File:",fileName.strip())
-
-    data, addrHost = s.recvfrom(buf)
-
-    sent = s.sendto("Echo", addrHost)
-
-    f = open(FILE_NAME.strip(),"w+") #cria um objeto manipular arquivos, abre o arquivo FILE_NAME no modo escrita
-    try:
-        while(data):
-            print("receiving ..." + str(data))
-            f.write(str(data))
-            s.settimeout(0)
-            data, addrHost = s.recvfrom(buf)
-    except:
-        data += " - DONE!"
-        sent = s.sendto(data, addrHost)
-        print("File Downloaded")
-        f.close()
-        s.close()
+	payload, client_address = sock.recvfrom(1024)
+	print("Echoing data back to " + str(client_address))
+	sent = sock.sendto(payload, (client_address[0], 31338))

@@ -1,42 +1,27 @@
-# ----- sender.py ------
-
-#!/usr/bin/env python
-
 import socket
-import sys
-import select
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-host = "54.209.33.15"
-port = 7000
-buf =1024
-addr = (host,port)
+UDP_IP = "127.0.0.1"
+UDP_PORT = 31337
+f = open("send_UDP.txt", "r")
 
-file_name = "Send_UDP.txt"
+MESSAGE = bytes(f.read(), 'utf-8')
 
-print ("Sending file: " + file_name)
+print("UDP target IP: %s" % UDP_IP)
+print("UDP target port: %s" % UDP_PORT)
+print("message: %s" % MESSAGE)
 
-#s.sendto(file_name.encode(),addr)
+sock = socket.socket(socket.AF_INET, # Internet
+                     socket.SOCK_DGRAM) # UDP
 
-f=open(file_name,"rb")
-data = f.read(buf)
-while(data):
-    if(s.sendto(data,addr)):
-        print ("sending..." + str(data))
-        data = f.read(buf)
+sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
 
-print ("File sent")
 
-f = open("Recieved_UDP.txt","w+")
-print ("Waiting...")
-data = s.recvfrom(buf)
-try:
-    while (data):
-        print("receiving ..." + str(data))
-        f.write(str(data))
-        s.settimeout(2)
-        data, addrHost = s.recvfrom(buf)
-except:
-    print("End of file")
-s.close()
-f.close()
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_address = '127.0.0.1'
+server_port = 31338
+
+server = (server_address, server_port)
+sock.bind(server)
+
+data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+print("received message: %s" % data)
