@@ -18,12 +18,12 @@ def get_digest(file_path):
 
 
 s = socket.socket()             # Create a socket object
-host = '54.209.33.15' 
-port = 60003                    # Reserve a port for your service.
+host =sys.argv[1] 
+port = 60004                    # Reserve a port for your service.
 
 s.connect((host, port))
 
-filename = sys.argv[1].encode('utf-8')
+filename = sys.argv[2].encode('utf-8')
 s.send(filename)
 
 with open(filename, 'wb') as f:

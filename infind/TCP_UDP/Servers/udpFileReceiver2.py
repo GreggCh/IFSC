@@ -47,3 +47,4 @@ while(True):
 
     f = open("hash.txt",'wb')
     f.write(get_digest("image.jpg").encode('utf-8'))
+    f.close()
