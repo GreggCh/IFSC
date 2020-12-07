@@ -18,7 +18,7 @@ def get_digest(file_path):
 
 
 s = socket.socket()             # Create a socket object
-host = socket.gethostname()     # Get local machine name
+host = '54.209.33.15' 
 port = 60003                    # Reserve a port for your service.
 
 s.connect((host, port))
@@ -39,5 +39,6 @@ f.close()
 print('Successfully get the file')
 s.close()
 print('connection closed')
-if os.path.exists("image.jpg"):
-    print(get_digest("image.jpg"))
+if (filename != "hash.txt"):
+    if os.path.exists(filename):
+        print(get_digest(filename))

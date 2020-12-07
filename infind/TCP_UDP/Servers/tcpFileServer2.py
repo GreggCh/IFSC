@@ -27,8 +27,9 @@ while True:
     else:
       conn.send(b"There is no hash file. Upload the image.jpg via UDP first to generate the hash file.")
     conn.close()
-        
-    if os.path.exists(filename):
-      os.remove(filename)
-    else:
-      print("The file does not exist")
+
+    if (filename != "pingpong.jpg"):   
+      if (os.path.exists(filename)):
+        os.remove(filename)
+      else:
+        print("The file does not exist")
