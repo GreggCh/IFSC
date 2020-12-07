@@ -1,6 +1,7 @@
 import socket                   # Import socket module
 import hashlib
 import sys
+import os
 
 def get_digest(file_path):
     h = hashlib.sha256()
@@ -38,4 +39,5 @@ f.close()
 print('Successfully get the file')
 s.close()
 print('connection closed')
-print(get_digest("image.jpg"))
+if os.path.exists("image.jpg"):
+    print(get_digest("image.jpg"))
