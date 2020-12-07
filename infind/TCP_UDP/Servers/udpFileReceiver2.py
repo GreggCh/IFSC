@@ -22,26 +22,28 @@ def get_digest(file_path):
 
 host = "127.0.0.1"  
 port = 9999
-s = socket(AF_INET,SOCK_DGRAM)
-s.bind((host,port))
 
-addr = (host,port)
-buf=1024
 
-data,addr = s.recvfrom(buf)
-print ("Received File:",data.strip())
-f = open("image.jpg",'wb')
+while(True):
+    s = socket(AF_INET,SOCK_DGRAM)
+    s.bind((host,port))
 
-data,addr = s.recvfrom(buf)
-try:
-    while(data):
-        f.write(data)
-        s.settimeout(2)
-        data,addr = s.recvfrom(buf)
-except timeout:
-    f.close()
-    s.close()
-    print ("File Downloaded")
+    addr = (host,port)
+    buf=1024
+    data, addr = s.recvfrom(buf)
+    print ("Received File:",data.strip())
+    f = open("image.jpg",'wb')
 
-f = open("hash.txt",'wb')
-f.write(get_digest("image.jpg").encode('utf-8'))
+    data,addr = s.recvfrom(buf)
+    try:
+        while(data):
+            f.write(data)
+            s.settimeout(2)
+            data,addr = s.recvfrom(buf)
+    except timeout:
+        f.close()
+        s.close()
+        print ("File Downloaded")
+
+    f = open("hash.txt",'wb')
+    f.write(get_digest("image.jpg").encode('utf-8'))

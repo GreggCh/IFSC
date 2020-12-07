@@ -39,6 +39,6 @@ f.close()
 print('Successfully get the file')
 s.close()
 print('connection closed')
-if (filename != "hash.txt"):
+if (filename.decode('utf-8') != "hash.txt"):
     if os.path.exists(filename):
         print(get_digest(filename))
