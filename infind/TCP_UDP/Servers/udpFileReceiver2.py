@@ -6,6 +6,12 @@ from socket import *
 import sys
 import select
 import hashlib
+import os
+
+pid = str(os.getpid())
+currentFile = open('/tmp/udp.pid', 'w')
+currentFile.write(pid)
+currentFile.close()
 
 def get_digest(file_path):
     h = hashlib.sha256()
