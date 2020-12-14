@@ -19,7 +19,7 @@ def get_digest(file_path):
 
 s = socket.socket()             # Create a socket object
 host =sys.argv[1] 
-port = 60004                    # Reserve a port for your service.
+port = 60000                    # Reserve a port for your service.
 
 s.connect((host, port))
 

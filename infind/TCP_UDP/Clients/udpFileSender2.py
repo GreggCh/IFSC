@@ -22,7 +22,7 @@ def get_digest(file_path):
 
 s = socket(AF_INET,SOCK_DGRAM)
 host =sys.argv[1]
-port = 9999
+port = 50000
 buf =1024
 addr = (host,port)
 

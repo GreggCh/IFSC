@@ -2,14 +2,21 @@
 import os
 import socket                   # Import socket module
 
-port = 60004                    # Reserve a port for your service.
+
+pid = str(os.getpid())
+currentFile = open('/tmp/tcp.pid', 'w')
+currentFile.write(pid)
+currentFile.close()
+
+print ('PID file created...')
+
+port = 60000                   # Reserve a port for your service.
 s = socket.socket()             # Create a socket object
 host = '127.0.0.1'    # Get local machine name
 s.bind((host, port))            # Bind to the port
 s.listen(5)                     # Now wait for client connection.
 
-print ('Server listening....')
-
+print ('Server listening...')
 while True:
     conn, addr = s.accept()     # Establish connection with client.
     print ('Got connection from', addr)
