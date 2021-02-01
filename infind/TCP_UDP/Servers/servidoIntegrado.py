@@ -30,7 +30,6 @@ def get_digest(file_path):
 host = "0.0.0.0"  
 port = 8000
 
-
 while(True):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind((host,port))
@@ -55,8 +54,10 @@ while(True):
     f = open("hash.txt",'wb')
     f.write(get_digest("image.jpg").encode('utf-8'))
     f.close()
+
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.close()
-    
+   
     time.sleep(2)
 
     ss = socket.socket()             # Create a socket object
