@@ -56,12 +56,12 @@ while(True):
     f.close()
 
 
-s = socket.socket()             # Create a socket object
-s.bind((host, port))            # Bind to the port
-s.listen(5)                     # Now wait for client connection.
+    s = socket.socket()             # Create a socket object
+    s.bind((host, port))            # Bind to the port
+    s.listen(5)                     # Now wait for client connection.
 
-print ('Server listening...')
-while True:
+    print ('Server listening...')
+
     conn, addr = s.accept()     # Establish connection with client.
     print ('Got connection from', addr)
     data = conn.recv(1024)
