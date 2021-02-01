@@ -7,6 +7,7 @@ import sys
 import select
 import hashlib
 import os
+import time
 
 pid = str(os.getpid())
 currentFile = open('/tmp/udp.pid', 'w')
@@ -55,7 +56,8 @@ while(True):
     f.write(get_digest("image.jpg").encode('utf-8'))
     f.close()
     s.close()
-
+    
+    time.sleep(2)
 
     ss = socket.socket()             # Create a socket object
     ss.bind((host, port))            # Bind to the port
