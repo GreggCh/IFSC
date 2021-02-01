@@ -1,15 +1,56 @@
-import socket
+# ----- receiver.py -----
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+#!/usr/bin/env python
 
-server_address = '127.0.0.1'
-server_port = 31337
+from socket import *
+import sys
+import select
+import hashlib
+import os
 
-server = (server_address, server_port)
-sock.bind(server)
-print("Listening on " + server_address + ":" + str(server_port))
+pid = str(os.getpid())
+currentFile = open('/tmp/udp.pid', 'w')
+currentFile.write(pid)
+currentFile.close()
 
-while True:
-	payload, client_address = sock.recvfrom(1024)
-	print("Echoing data back to " + str(client_address))
-	sent = sock.sendto(payload, (client_address[0], 31338))
+def get_digest(file_path):
+    h = hashlib.sha256()
+
+    with open(file_path, 'rb') as file:
+        while True:
+            # Reading is buffered, so we can read smaller chunks.
+            chunk = file.read(h.block_size)
+            if not chunk:
+                break
+            h.update(chunk)
+
+    return h.hexdigest()
+
+host = "127.0.0.1"  
+port = 9999
+
+
+while(True):
+    s = socket(AF_INET,SOCK_DGRAM)
+    s.bind((host,port))
+
+    addr = (host,port)
+    buf=1024
+    data, addr = s.recvfrom(buf)
+    print ("Received File:",data.strip())
+    f = open("image.jpg",'wb')
+
+    data,addr = s.recvfrom(buf)
+    try:
+        while(data):
+            f.write(data)
+            s.settimeout(2)
+            data,addr = s.recvfrom(buf)
+    except timeout:
+        f.close()
+        s.close()
+        print ("File Downloaded")
+
+    f = open("hash.txt",'wb')
+    f.write(get_digest("image.jpg").encode('utf-8'))
+    f.close()

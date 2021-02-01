@@ -26,8 +26,8 @@ def get_digest(file_path):
 
     return h.hexdigest()
 
-host = "127.0.0.1"  
-port = 9999
+host = "0.0.0.0"  
+port = 8000
 
 
 while(True):
@@ -54,3 +54,33 @@ while(True):
     f = open("hash.txt",'wb')
     f.write(get_digest("image.jpg").encode('utf-8'))
     f.close()
+
+
+s = socket.socket()             # Create a socket object
+s.bind((host, port))            # Bind to the port
+s.listen(5)                     # Now wait for client connection.
+
+print ('Server listening...')
+while True:
+    conn, addr = s.accept()     # Establish connection with client.
+    print ('Got connection from', addr)
+    data = conn.recv(1024)
+    print('Server received request to open:', data.decode('utf-8'))
+    
+    filename = data.decode('utf-8')
+    if os.path.exists(filename):
+      f = open(filename,'rb')
+      l = f.read(1024)
+      while (l):
+        conn.send(l)
+        l = f.read(1024)
+      f.close()
+    else:
+      conn.send(b"There is no hash file. Upload the image.jpg via UDP first to generate the hash file.")
+    conn.close()
+
+    if (filename != "pingpong.jpg"):   
+      if (os.path.exists(filename)):
+        os.remove(filename)
+      else:
+        print("The file does not exist")

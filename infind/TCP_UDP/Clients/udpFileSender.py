@@ -1,27 +1,41 @@
-import socket
+# ----- sender.py ------
 
-UDP_IP = "127.0.0.1"
-UDP_PORT = 31337
-f = open("send_UDP.txt", "r")
+#!/usr/bin/env python
 
-MESSAGE = bytes(f.read(), 'utf-8')
+from socket import *
+import sys
+import hashlib
 
-print("UDP target IP: %s" % UDP_IP)
-print("UDP target port: %s" % UDP_PORT)
-print("message: %s" % MESSAGE)
+def get_digest(file_path):
+    h = hashlib.sha256()
 
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
+    with open(file_path, 'rb') as file:
+        while True:
+            # Reading is buffered, so we can read smaller chunks.
+            chunk = file.read(h.block_size)
+            if not chunk:
+                break
+            h.update(chunk)
 
-sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+    return h.hexdigest()
 
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_address = '127.0.0.1'
-server_port = 31338
+s = socket(AF_INET,SOCK_DGRAM)
+host =sys.argv[1]
+port = 50000
+buf =1024
+addr = (host,port)
 
-server = (server_address, server_port)
-sock.bind(server)
+#file_name=sys.argv[2]
+file_name = b"pingpong.jpg"
+print(get_digest(file_name))
 
-data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-print("received message: %s" % data)
+s.sendto(file_name,addr)
+
+f=open(file_name,"rb")
+data = f.read(buf)
+while (data):
+    if(s.sendto(data,addr)):
+        data = f.read(buf)
+s.close()
+f.close()
