@@ -54,6 +54,7 @@ while(True):
     f = open("hash.txt",'wb')
     f.write(get_digest("image.jpg").encode('utf-8'))
     f.close()
+    s.close()
 
 
     ss = socket.socket()             # Create a socket object
