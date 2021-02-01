@@ -2,7 +2,7 @@
 
 #!/usr/bin/env python
 
-from socket import *
+import socket
 import sys
 import select
 import hashlib
@@ -31,7 +31,7 @@ port = 8000
 
 
 while(True):
-    s = socket(AF_INET,SOCK_DGRAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind((host,port))
 
     addr = (host,port)
@@ -46,7 +46,7 @@ while(True):
             f.write(data)
             s.settimeout(2)
             data,addr = s.recvfrom(buf)
-    except timeout:
+    except socket.timeout:
         f.close()
         s.close()
         print ("File Downloaded")
