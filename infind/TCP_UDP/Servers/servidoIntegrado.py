@@ -56,13 +56,13 @@ while(True):
     f.close()
 
 
-    s = socket.socket()             # Create a socket object
-    s.bind((host, port))            # Bind to the port
-    s.listen(5)                     # Now wait for client connection.
+    ss = socket.socket()             # Create a socket object
+    ss.bind((host, port))            # Bind to the port
+    ss.listen(5)                     # Now wait for client connection.
 
     print ('Server listening...')
 
-    conn, addr = s.accept()     # Establish connection with client.
+    conn, addr = ss.accept()     # Establish connection with client.
     print ('Got connection from', addr)
     data = conn.recv(1024)
     print('Server received request to open:', data.decode('utf-8'))
@@ -84,3 +84,5 @@ while(True):
         os.remove(filename)
       else:
         print("The file does not exist")
+    
+    ss.close()
