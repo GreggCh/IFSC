@@ -42,15 +42,16 @@ while (data):
 s.close()
 f.close()
 
-socket_receiver = socket(AF_INET,SOCK_DGRAM)
-socket_receiver.bind(("127.0.0.1",125))
+# socket_receiver = socket(AF_INET,SOCK_DGRAM)
+# socket_receiver.bind(("127.0.0.1",125))
 
-addr = ("127.0.0.1", 125)
-buf=1024
-try:
-    socket_receiver.settimeout(2)
-    data, addr = socket_receiver.recvfrom(buf)
-    print(data)
-except timeout:
-    print("timeout")
-socket_receiver.close()
+# addr = ("127.0.0.1", 125)
+# buf=8
+# data, addr = socket_receiver.recvfrom(buf)
+# while(data)
+#     try:
+#         socket_receiver.settimeout(5)        
+#         data, addr = socket_receiver.recvfrom(buf)
+#     except timeout:
+#         print("timeout")
+# socket_receiver.close()

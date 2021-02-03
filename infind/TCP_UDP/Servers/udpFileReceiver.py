@@ -44,7 +44,7 @@ while(True):
     try:
         while(data):
             f.write(data)
-            s.settimeout(2)
+            s.settimeout(0.2)
             data,addr = s.recvfrom(buf)
         f.close()
     except timeout:
