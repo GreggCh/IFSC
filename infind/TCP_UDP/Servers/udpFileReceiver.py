@@ -26,8 +26,8 @@ def get_digest(file_path):
 
     return h.hexdigest()
 
-host = "127.0.0.1"  
-port = 9999
+host = "0.0.0.0"  
+port = 124
 
 
 while(True):
@@ -46,11 +46,14 @@ while(True):
             f.write(data)
             s.settimeout(2)
             data,addr = s.recvfrom(buf)
+        f.close()
+        s.sendto(b"End of receiving data.")
+        print ("File Downloaded")
     except timeout:
         f.close()
-        s.close()
-        print ("File Downloaded")
 
+     
     f = open("hash.txt",'wb')
     f.write(get_digest("image.jpg").encode('utf-8'))
     f.close()
+    s.close()

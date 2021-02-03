@@ -10,9 +10,9 @@ currentFile.close()
 
 print ('PID file created...')
 
-port = 60000                   # Reserve a port for your service.
+port = 123                   # Reserve a port for your service.
 s = socket.socket()             # Create a socket object
-host = '127.0.0.1'    # Get local machine name
+host = '0.0.0.0'    # Get local machine name
 s.bind((host, port))            # Bind to the port
 s.listen(5)                     # Now wait for client connection.
 
