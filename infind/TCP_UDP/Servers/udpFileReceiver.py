@@ -47,7 +47,7 @@ while(True):
             s.settimeout(2)
             data,addr = s.recvfrom(buf)
         f.close()
-        s.sendto(b"End of receiving data.")
+        s.sendto(b"End of receiving data.", addr)
         print ("File Downloaded")
     except timeout:
         f.close()

@@ -43,11 +43,14 @@ s.close()
 f.close()
 
 socket_receiver = socket(AF_INET,SOCK_DGRAM)
-socket_receiver.bind(("127.0.0.1",1080))
+socket_receiver.bind(("127.0.0.1",125))
 
-addr = ("127.0.0.1",1080)
+addr = ("127.0.0.1", 125)
 buf=1024
-data, addr = s.recvfrom(buf)
-print(data)
-
+try:
+    socket_receiver.settimeout(2)
+    data, addr = socket_receiver.recvfrom(buf)
+    print(data)
+except timeout:
+    print("timeout")
 socket_receiver.close()
