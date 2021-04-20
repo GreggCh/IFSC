@@ -11,14 +11,14 @@ json_data = None
 
 STWIN_DIR = "./STWIN"
 
-host = 'http://127.0.0.1:9090/api/v1'
-APIKEY_A = '5mlHuObgIIbHHoeuimBq' #Vibration_A
+host = 'http://34.204.166.205:9090/api/v1'
+APIKEY_A = 'HdwAvKas5ZfogOQOGu21' #Vibration_A
 APIKEY_B = 'u3E5SvQaYcR2nwjGWkaJ' #Vibration_B
 
-broker = '54.209.33.15'
+broker = '52.201.224.181'
 port = 1883
 topic = "itg200/embrapii"
-client_id = f'python-mqtt-{random.randint(0, 1000)}'
+client_id = f'khomp-mqtt-{random.randint(0, 1000)}'
 username = 'gregory'
 password = 'Astra2010'
 
