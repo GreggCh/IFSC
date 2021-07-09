@@ -10,7 +10,7 @@ json_data = None
 
 STWIN_DIR = "./STWIN"
 
-host = 'http://34.204.166.205:9090/api/v1'
+host = 'http://34.204.166.205:80/api/v1'
 APIKEY_A = 'HdwAvKas5ZfogOQOGu21' #Vibration_A
 APIKEY_B = 'u3E5SvQaYcR2nwjGWkaJ' #Vibration_B
 
@@ -38,7 +38,7 @@ def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         payload = msg.payload.decode()
         print(f"Received `{payload}` from `{msg.topic}` topic")
-        payload = """{"data":""" + payload + "}"
+        payload = """{"data":""" + payload + "}"""
         try:
             postOnTB(APIKEY_A, (payload))
             print(f"Sent: '{payload}'")

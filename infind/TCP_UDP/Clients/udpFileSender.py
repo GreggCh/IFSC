@@ -21,37 +21,26 @@ def get_digest(file_path):
 
 
 s = socket(AF_INET,SOCK_DGRAM)
-host =sys.argv[1]
+host = sys.argv[1]
 port = 124
 buf = 1024
 addr = (host,port)
 
-#file_name=sys.argv[2]
-file_name = b"pingpong.jpg"
+file_name=sys.argv[2]
+#file_name = b"imagem.jpg"
 print(get_digest(file_name))
 
-s.sendto(file_name,addr)
-
 f=open(file_name,"rb")
+
+s.sendto(file_name.encode(),addr)
+
 data = f.read(buf)
 while (data):
     if(s.sendto(data,addr)):
         data = f.read(buf)
 
-
+s.sendto(b"\r",addr)
+resposta = s.recvfrom(1024)
+print(resposta)
 s.close()
 f.close()
-
-# socket_receiver = socket(AF_INET,SOCK_DGRAM)
-# socket_receiver.bind(("127.0.0.1",125))
-
-# addr = ("127.0.0.1", 125)
-# buf=8
-# data, addr = socket_receiver.recvfrom(buf)
-# while(data)
-#     try:
-#         socket_receiver.settimeout(5)        
-#         data, addr = socket_receiver.recvfrom(buf)
-#     except timeout:
-#         print("timeout")
-# socket_receiver.close()

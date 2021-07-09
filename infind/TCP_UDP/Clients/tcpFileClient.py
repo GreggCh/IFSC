@@ -23,10 +23,12 @@ port = 123                    # Reserve a port for your service.
 
 s.connect((host, port))
 
-filename = sys.argv[2].encode('utf-8')
-s.send(filename)
+file_name = sys.argv[2].encode('utf-8')
+s.send(file_name)
+file_name = "downloaded_" + file_name.decode('utf-8')
+file_name = file_name.encode('utf-8')
 
-with open(filename, 'wb') as f:
+with open(file_name, 'wb') as f:
     print ('file opened')
     while True:
         data = s.recv(1024)
@@ -39,6 +41,4 @@ f.close()
 print('Successfully get the file')
 s.close()
 print('connection closed')
-if (filename.decode('utf-8') != "hash.txt"):
-    if os.path.exists(filename):
-        print(get_digest(filename))
+print(get_digest(file_name))

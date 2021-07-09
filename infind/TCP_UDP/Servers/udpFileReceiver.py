@@ -8,11 +8,6 @@ import select
 import hashlib
 import os
 
-pid = str(os.getpid())
-currentFile = open('/tmp/udp.pid', 'w')
-currentFile.write(pid)
-currentFile.close()
-
 def get_digest(file_path):
     h = hashlib.sha256()
 
@@ -26,34 +21,38 @@ def get_digest(file_path):
 
     return h.hexdigest()
 
-host = "0.0.0.0"  
+host = "127.0.0.1"  
 port = 124
 
 
 while(True):
-    s = socket(AF_INET,SOCK_DGRAM)
+    s = socket(AF_INET,SOCK_DGRAM) #estou dizendo que vou usar o UDP na camada de transporte
     s.bind((host,port))
 
     addr = (host,port)
     buf=1024
+    print ("Pronto para receber dados...")
     data, addr = s.recvfrom(buf)
-    print ("Received File:",data.strip())
-    f = open("image.jpg",'wb')
+    print ("Received File:", data)
+    file_name = data.decode('utf-8')
+    f = open(file_name,'wb')
 
     data,addr = s.recvfrom(buf)
+      
     try:
-        while(data):
+        while(data != b"\r"):
             f.write(data)
             s.settimeout(0.2)
             data,addr = s.recvfrom(buf)
         f.close()
-    except timeout:
         s.sendto(b"End of receiving data.", addr)
         print ("File Downloaded")
+    except timeout:
+        s.sendto(b"Timeout of 200ms exceeded!", addr)
         f.close()
 
-     
-    f = open("hash.txt",'wb')
-    f.write(get_digest("image.jpg").encode('utf-8'))
+    hash_file = file_name[0:-4] + "_hash.txt"
+    f = open(hash_file.encode('utf-8'),'wb')
+    f.write(get_digest(file_name).encode('utf-8'))
     f.close()
     s.close()

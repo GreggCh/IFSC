@@ -2,17 +2,11 @@
 import os
 import socket                   # Import socket module
 
-
-pid = str(os.getpid())
-currentFile = open('/tmp/tcp.pid', 'w')
-currentFile.write(pid)
-currentFile.close()
-
 print ('PID file created...')
 
 port = 123                   # Reserve a port for your service.
 s = socket.socket()             # Create a socket object
-host = '0.0.0.0'    # Get local machine name
+host = '127.0.0.1'    # Get local machine name
 s.bind((host, port))            # Bind to the port
 s.listen(5)                     # Now wait for client connection.
 
@@ -20,12 +14,12 @@ print ('Server listening...')
 while True:
     conn, addr = s.accept()     # Establish connection with client.
     print ('Got connection from', addr)
-    data = conn.recv(1024)
-    print('Server received request to open:', data.decode('utf-8'))
+    data = conn.recv(1024)    
+    file_name = data.decode('utf-8')
+    print('Server received request to open:', file_name)
     
-    filename = data.decode('utf-8')
-    if os.path.exists(filename):
-      f = open(filename,'rb')
+    if os.path.exists(file_name):
+      f = open(file_name,'rb')
       l = f.read(1024)
       while (l):
         conn.send(l)
@@ -35,8 +29,8 @@ while True:
       conn.send(b"There is no hash file. Upload the image.jpg via UDP first to generate the hash file.")
     conn.close()
 
-    if (filename != "pingpong.jpg"):   
-      if (os.path.exists(filename)):
-        os.remove(filename)
-      else:
-        print("The file does not exist")
+     
+    if (os.path.exists(file_name)):
+      os.remove(file_name)
+    else:
+      print("The file does not exist")
