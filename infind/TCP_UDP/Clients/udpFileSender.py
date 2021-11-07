@@ -22,18 +22,21 @@ def get_digest(file_path):
 
 s = socket(AF_INET,SOCK_DGRAM)
 host = sys.argv[1]
-port = 124
+port = int(sys.argv[2])
 buf = 1024
 addr = (host,port)
 
-file_name=sys.argv[2]
+file_name=sys.argv[3]
 #file_name = b"imagem.jpg"
 print(get_digest(file_name))
-
 f=open(file_name,"rb")
 
-s.sendto(file_name.encode(),addr)
-
+print("Sending: "+ file_name)
+s.sendto(file_name.encode('utf-8'),addr)
+print("Waiting for confirmation to send data...")
+resposta = s.recvfrom(1024)
+print(str(resposta[0].decode('utf-8')))
+print("Sending data...")
 data = f.read(buf)
 while (data):
     if(s.sendto(data,addr)):
@@ -41,6 +44,6 @@ while (data):
 
 s.sendto(b"\r",addr)
 resposta = s.recvfrom(1024)
-print(resposta)
+print(str(resposta[0].decode('utf-8')))
 s.close()
 f.close()

@@ -18,12 +18,12 @@ def get_digest(file_path):
 
 
 s = socket.socket()             # Create a socket object
-host =sys.argv[1] 
-port = 123                    # Reserve a port for your service.
+host = sys.argv[1] 
+port = int(sys.argv[2])                    # Reserve a port for your service.
 
 s.connect((host, port))
 
-file_name = sys.argv[2].encode('utf-8')
+file_name = sys.argv[3].encode('utf-8')
 s.send(file_name)
 file_name = "downloaded_" + file_name.decode('utf-8')
 file_name = file_name.encode('utf-8')
