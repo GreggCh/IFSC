@@ -6,8 +6,8 @@ print('Wellcome to the CHAT. Enjoy! Write "#exit" to close...')
 s = socket.socket()             # Create a socket object
 s2 = socket.socket()
 host = '127.0.0.1'   
-
 port = 8889
+
 s.connect((host, port))
 my_nick = sys.argv[1]
 s.send(my_nick.encode())
