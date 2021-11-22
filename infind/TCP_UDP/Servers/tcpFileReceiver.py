@@ -26,7 +26,7 @@ port = 124
 
 
 while(True):
-    s = socket(AF_INET,SOCK_DGRAM) #estou dizendo que vou usar o UDP na camada de transporte
+    s = socket(AF_INET, SOCK_STREAM) #estou dizendo que vou usar o TCP na camada de transporte
     s.bind((host,port))
 
     addr = (host,port)
