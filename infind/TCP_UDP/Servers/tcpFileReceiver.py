@@ -42,7 +42,6 @@ while(True):
     try:
         while(data != b"\r"):
             f.write(data)
-            s.settimeout(0.2)
             data,addr = s.recvfrom(buf)
         f.close()
         s.sendto(b"End of receiving data.", addr)
