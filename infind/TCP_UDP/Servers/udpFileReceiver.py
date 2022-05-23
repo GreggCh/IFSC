@@ -7,6 +7,7 @@ import sys
 import select
 import hashlib
 import os
+import subprocess
 
 def get_digest(file_path):
     h = hashlib.sha256()
@@ -22,8 +23,9 @@ def get_digest(file_path):
     return h.hexdigest()
 
 host = "127.0.0.1"  
-port = 124
+port = 8883
 
+subprocess.call(['sh','./script.sh'])
 
 while(True):
     s = socket(AF_INET,SOCK_DGRAM) #estou dizendo que vou usar o UDP na camada de transporte

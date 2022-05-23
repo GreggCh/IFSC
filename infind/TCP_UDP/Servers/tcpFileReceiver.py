@@ -22,36 +22,34 @@ def get_digest(file_path):
     return h.hexdigest()
 
 host = "127.0.0.1"  
-port = 124
+port = 8000
 
+s = socket(AF_INET, SOCK_STREAM) #estou dizendo que vou usar o TCP na camada de transporte
+s.bind((host,port))
+
+addr = (host,port)
+buf=1024
 
 while(True):
-    s = socket(AF_INET, SOCK_STREAM) #estou dizendo que vou usar o TCP na camada de transporte
-    s.bind((host,port))
-
-    addr = (host,port)
-    buf=1024
     print ("Pronto para receber dados...")
-    data, addr = s.recvfrom(buf)
+    s.listen(5)
+    c, addr = s.accept()
+    data = c.recv(buf)
     print ("Received File:", data)
     file_name = data.decode('utf-8')
-    s.sendto(b"Send the data!", addr)
+    c.send(b"Send the data!")
     f = open(file_name,'wb')
-    data,addr = s.recvfrom(buf)
-      
-    try:
-        while(data != b"\r"):
-            f.write(data)
-            data,addr = s.recvfrom(buf)
-        f.close()
-        s.sendto(b"End of receiving data.", addr)
-        print ("File Downloaded")
-    except timeout:
-        s.sendto(b"Timeout of 200ms exceeded!", addr)
-        f.close()
+
+    data = c.recv(buf)
+    while(data):
+        print("Receiving...") 
+        f.write(data)
+        data = c.recv(buf)    
+    f.close()
+    c.close()
+    print ("File Downloaded")
 
     hash_file = file_name[0:-4] + "_hash.txt"
     f = open(hash_file.encode('utf-8'),'wb')
     f.write(get_digest(file_name).encode('utf-8'))
     f.close()
-    s.close()
