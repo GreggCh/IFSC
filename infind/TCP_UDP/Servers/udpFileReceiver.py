@@ -22,6 +22,7 @@ def get_digest(file_path):
     return h.hexdigest()
 
 host = "172.16.0.51"  
+# host = "127.0.0.1" 
 port = 8000
 
 print ('UDP server running on ' + host + 'and port > ' + str(port))
@@ -62,7 +63,7 @@ while(True):
     s.close()
 
     now = datetime.now()      # Save the time
-    current_time = now.strftime("%H:%M:%S")
+    current_time = now.strftime("%d/%m/%Y, %H:%M:%S")
 
     log = log + "\tFile name:\t" + file_name + "\tat\t" + str(current_time) + "\n"
 

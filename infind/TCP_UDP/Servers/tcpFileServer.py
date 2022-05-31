@@ -5,7 +5,9 @@ from datetime import datetime
 
 port = 8883                   # Reserve a port for your service.
 s = socket.socket()             # Create a socket object
-host = '172.16.0.51'    # Get local machine name
+host = '172.16.0.51'    
+# host = "127.0.0.1" 
+
 s.bind((host, port))            # Bind to the port
 s.listen(5)                     # Now wait for client connection.
 
@@ -34,7 +36,7 @@ while True:
     conn.close()
 
     now = datetime.now()      # Save the time
-    current_time = now.strftime("%H:%M:%S")
+    current_time = now.strftime("%d/%m/%Y, %H:%M:%S")
 
     log = log + "\tFile name:\t" + file_name + "\tat\t" + str(current_time) + "\n"
 
