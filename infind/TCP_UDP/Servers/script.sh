@@ -1,1 +1,2 @@
-python tcpFileServer.py
+python tcpFileServer.py &
+python udpFileReceiver.py &

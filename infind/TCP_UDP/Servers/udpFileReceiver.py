@@ -6,8 +6,7 @@ from socket import *
 import sys
 import select
 import hashlib
-import os
-import subprocess
+from datetime import datetime
 
 def get_digest(file_path):
     h = hashlib.sha256()
@@ -22,20 +21,23 @@ def get_digest(file_path):
 
     return h.hexdigest()
 
-host = "127.0.0.1"  
-port = 8883
+host = "200.135.184.51"  
+port = 8000
 
-subprocess.call(['sh','./script.sh'])
+print ('UDP server running on ' + host + 'and port > ' + str(port))
 
 while(True):
+
+    log = "UDP >>"
+
     s = socket(AF_INET,SOCK_DGRAM) #estou dizendo que vou usar o UDP na camada de transporte
     s.bind((host,port))
 
     addr = (host,port)
     buf=1024
-    print ("Pronto para receber dados...")
     data, addr = s.recvfrom(buf)
     print ("Received File:", data)
+
     file_name = data.decode('utf-8')
     s.sendto(b"Send the data!", addr)
     f = open(file_name,'wb')
@@ -58,3 +60,11 @@ while(True):
     f.write(get_digest(file_name).encode('utf-8'))
     f.close()
     s.close()
+
+    now = datetime.now()      # Save the time
+    current_time = now.strftime("%H:%M:%S")
+
+    log = log + "\tFile name:\t" + file_name + "\tat\t" + str(current_time) + "\n"
+
+    with open('../log.txt', 'a') as f:
+      f.write(log)

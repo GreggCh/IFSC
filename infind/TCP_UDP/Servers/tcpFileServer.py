@@ -1,19 +1,23 @@
 # server.py
 import os
 import socket                   # Import socket module
+from datetime import datetime
 
-print ('PID file created...')
-
-port = 123                   # Reserve a port for your service.
+port = 8883                   # Reserve a port for your service.
 s = socket.socket()             # Create a socket object
-host = '127.0.0.1'    # Get local machine name
+host = '200.135.184.51'    # Get local machine name
 s.bind((host, port))            # Bind to the port
 s.listen(5)                     # Now wait for client connection.
 
-print ('Server listening...')
+
+print ('TCP server runing on: ' + host + 'and listening on port > ' + str(port))
 while True:
+  
+    log = "TCP >>"
+
     conn, addr = s.accept()     # Establish connection with client.
     print ('Got connection from', addr)
+
     data = conn.recv(1024)    
     file_name = data.decode('utf-8')
     print('Server received request to open:', file_name)
@@ -29,6 +33,15 @@ while True:
       conn.send(b"There is no hash file. Upload the image.jpg via UDP first to generate the hash file.")
     conn.close()
 
+    now = datetime.now()      # Save the time
+    current_time = now.strftime("%H:%M:%S")
+
+    log = log + "\tFile name:\t" + file_name + "\tat\t" + str(current_time) + "\n"
+
+    with open('../log.txt', 'a') as f:
+      f.write(log)
+    
+    log = ""
      
     if (os.path.exists(file_name)):
       os.remove(file_name)
