@@ -21,7 +21,7 @@ def get_digest(file_path):
 
     return h.hexdigest()
 
-host = "200.135.184.51"  
+host = "172.16.0.51"  
 port = 8000
 
 print ('UDP server running on ' + host + 'and port > ' + str(port))
