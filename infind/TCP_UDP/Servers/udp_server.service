@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 User=root
-WorkingDirectory=/IFSC/infind/TCP_UDP/Servers
-ExecStart=/usr/bin/python3 /IFSC/infind/TCP_UDP/Servers/udpFileReceiver.py
+WorkingDirectory=/root/IFSC/infind/TCP_UDP/Servers
+ExecStart=/usr/bin/python3 /root/IFSC/infind/TCP_UDP/Servers/udpFileReceiver.py
 Restart=always
 RestartSec=3
 StandardOutput=syslog
