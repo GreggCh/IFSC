@@ -1,0 +1,16 @@
+[Unit]
+Description=Servidor UDP
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/IFSC/infind/TCP_UDP/Servers
+ExecStart=/usr/bin/python3 /IFSC/infind/TCP_UDP/Servers/udpFileReceiver.py
+Restart=always
+RestartSec=3
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=meu_servidor_udp
+
+[Install]
+WantedBy=multi-user.target
