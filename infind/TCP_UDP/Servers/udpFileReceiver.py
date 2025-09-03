@@ -22,7 +22,7 @@ def get_digest(file_path):
     return h.hexdigest()
 
 host = "64.227.114.120"  
-# host = "127.0.0.1" 
+#host = "127.0.0.1" 
 port = 8000
 
 print ('UDP server running on ' + host + 'and port > ' + str(port))
@@ -58,7 +58,8 @@ while(True):
         f.close()
 
     hash_file = file_name[0:-4] + "_hash.txt"
-    f = open(hash_file.encode('utf-8'),'wb')
+    file_path = "../arquivos_trabalho/"+hash_file
+    f = open(file_path.encode('utf-8'),'wb')
     f.write(get_digest(file_path).encode('utf-8'))
     f.close()
     s.close()

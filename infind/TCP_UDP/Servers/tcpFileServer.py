@@ -6,7 +6,7 @@ from datetime import datetime
 port = 8883                   # Reserve a port for your service.
 s = socket.socket()             # Create a socket object
 host = '64.227.114.120'    
-# host = "127.0.0.1" 
+#host = "127.0.0.1" 
 
 s.bind((host, port))            # Bind to the port
 s.listen(5)                     # Now wait for client connection.
