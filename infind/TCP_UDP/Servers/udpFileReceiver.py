@@ -21,7 +21,7 @@ def get_digest(file_path):
 
     return h.hexdigest()
 
-host = "172.16.0.51"  
+host = "64.227.114.120"  
 # host = "127.0.0.1" 
 port = 8000
 
@@ -41,7 +41,8 @@ while(True):
 
     file_name = data.decode('utf-8')
     s.sendto(b"Send the data!", addr)
-    f = open(file_name,'wb')
+    file_path = "../arquivos_trabalho/"+file_name
+    f = open(file_path,'wb')
     data,addr = s.recvfrom(buf)
       
     try:
@@ -58,7 +59,7 @@ while(True):
 
     hash_file = file_name[0:-4] + "_hash.txt"
     f = open(hash_file.encode('utf-8'),'wb')
-    f.write(get_digest(file_name).encode('utf-8'))
+    f.write(get_digest(file_path).encode('utf-8'))
     f.close()
     s.close()
 
