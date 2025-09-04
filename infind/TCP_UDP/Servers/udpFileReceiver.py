@@ -58,8 +58,8 @@ while(True):
         f.close()
 
     hash_file = file_name[0:-4] + "_hash.txt"
-    file_path = "../arquivos_trabalho/"+hash_file
-    f = open(file_path.encode('utf-8'),'wb')
+    hash_file_path = "../arquivos_trabalho/"+hash_file
+    f = open(hash_file_path.encode('utf-8'),'wb')
     f.write(get_digest(file_path).encode('utf-8'))
     f.close()
     s.close()
